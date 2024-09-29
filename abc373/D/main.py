@@ -41,7 +41,7 @@ def main() -> None:
                 cur = stack.pop()
                 seen[cur] = 1
 
-                #  頂点に入った時の処理はここ
+                #   頂点に入った時の処理はここ
 
                 for nxt, cost in edges[cur]:
                     if not seen[nxt]:
