@@ -17,6 +17,19 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
+    n = int(input())
+    x = list(map(int, input().split()))
+    p = list(map(int, input().split()))
+    q = int(input())
+    query = [list(map(int, input().split())) for i in range(q)]
+
+    acc_p = [0] + list(accumulate(p))
+
+    for li, ri in query:
+        lidx = bisect_left(x, li)
+        ridx = bisect_right(x, ri)
+
+        print(acc_p[ridx] - acc_p[lidx])
     return
 
 
