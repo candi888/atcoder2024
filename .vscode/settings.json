@@ -21,11 +21,11 @@
     "editor.fastScrollSensitivity": 1,
     "terminal.integrated.defaultProfile.osx": "bash",
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "terminal.integrated.enableMultiLinePasteWarning": false,
     "editor.suggest.showWords": false, // textもいらないので消す
     "python.createEnvironment.trigger": "off",
     "ruff.lint.args": [
-        "--ignore F401"
+        "--ignore",
+        "F401"
     ],
     "mypy-type-checker.args": [
         "--disallow-untyped-defs",
