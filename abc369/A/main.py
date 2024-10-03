@@ -17,6 +17,19 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
+    a, b = list(map(int, input().split()))
+
+    if a > b:
+        a, b = b, a
+
+    res = 3
+    if a == b:
+        res = 1
+    elif (b - a) % 2:
+        res = 2
+
+    print(res)
+
     return
 
 
