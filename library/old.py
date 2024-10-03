@@ -10,23 +10,6 @@ from bisect import bisect_left
 lis = []
 
 
-#! 尺取り法(短いとok,長いとoutの場合)
-
-que = deque()
-for r in lis:
-    que.append(r)
-    # 右端を伸ばした時に行う処理
-
-    while que and (not "判定条件"):  # 要は条件を満たさない時
-        l = que.popleft()
-        # 左端を縮めた時に行う処理
-
-    # なんかの処理。
-    # 今のdequeは任意の右端に対して条件を満たす最長の連続部分列となっているのでそれを活かす
-
-# 短いとout,長いとokの場合は？
-# 判定条件から補集合を考えて同じようにやればよい
-
 #! ダブリング、周期性を見出す
 
 """
