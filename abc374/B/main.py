@@ -23,6 +23,19 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
+    s = input()
+    t = input()
+
+    for i in range(max(len(s), len(t))):
+        if i >= min(len(s), len(t)):
+            print(i + 1)
+            return
+
+        if s[i] != t[i]:
+            print(i + 1)
+            return
+
+    print(0)
     return
 
 

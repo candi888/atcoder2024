@@ -23,6 +23,9 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
+    s = input()
+
+    print("Yes" if s[-3:] == "san" else "No")
     return
 
 

@@ -1,6 +1,6 @@
 from bisect import bisect_left, bisect_right
 from collections import Counter, defaultdict, deque
-from itertools import accumulate, product, permutations
+from itertools import accumulate, permutations, product
 from sys import setrecursionlimit, stdin
 
 

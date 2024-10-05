@@ -6,6 +6,7 @@ from sys import setrecursionlimit, stdin, stdout
 input = lambda: stdin.readline().strip()
 setrecursionlimit(700000)
 from bisect import bisect_left
+from heapq import heapify, heappop, heappush
 
 lis = []
 
@@ -177,37 +178,6 @@ def dfs():
             )  # 遷移式で使う材料をtmp配列に記憶
 
 
-#! ダイクストラ
-
-from heapq import heapify, heappop, heappush
-
-
-def dijkstra(edge, n, start):  # [行先、辺の重み],頂点の数,始点
-    mindis = [10**18 for i in range(n)]  # 最短経路長を管理。infで初期化
-    mindis[start] = 0
-
-    confirmed = [0 for i in range(n)]  # 確定済みの頂点
-
-    hl = []  # heapq用の配列
-    heappush(hl, [0, start])  # [頂点の暫定値、頂点の名前]
-
-    while hl:
-        _, now = heappop(hl)  # その時点での最短経路長の頂点を確定
-
-        if confirmed[now]:
-            continue  # 確定済みだったら飛ばす、そうでなければ確定させる
-        confirmed[now] = 1
-
-        for goal, cost in edge[now]:
-            if mindis[now] + cost < mindis[goal]:
-                mindis[goal] = mindis[now] + cost
-                heappush(hl, [mindis[goal], goal])
-
-    return mindis  # 始点からすべての頂点までの最短経路を０(ElogV)で計算する
-
-
-# 欲しい頂点が確定したらその時点でbreakすれば高速化になる
-
 #! ワーシャルフロイド
 # dp[i][j]はedgeのコストで初期化、なければinf
 dp = [[]]
@@ -365,7 +335,7 @@ for a in A:
 
 
 # 1 基本これでよさそう
-def sqrt(x):
+def calc_sqrt(x):
     sq = int(x ** (0.5))
     if sq**2 > x:
         sq -= 1
