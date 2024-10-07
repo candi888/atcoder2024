@@ -1,0 +1,6 @@
+{
+    "ruff.lint.args": [
+        "--ignore",
+        "F401"
+    ],
+}
