@@ -23,6 +23,18 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
+    n = int(input())
+    a = list(map(int, input().split()))
+
+    for cnt in range(INF):
+        if sum([ai > 0 for ai in a]) <= 1:
+            print(cnt)
+            return
+
+        a.sort(reverse=True)
+
+        a[0] -= 1
+        a[1] -= 1
     return
 
 
