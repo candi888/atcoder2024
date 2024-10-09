@@ -11,59 +11,6 @@ from heapq import heapify, heappop, heappush
 lis = []
 
 
-#! ダブリング、周期性を見出す
-
-"""
-K回同じ操作をした後の状態を知りたい（kがクソデカ整数）の場合に、o(k)をo(log(k))に落とせる。
-Dv[i][j]→jに2^i回操作したら何に飛んでいくか
-"""
-# n, k = map(int, input().split())  # kが操作の繰り返し回数
-# a = list(map(int, input().split()))
-
-# dv = [[0 for j in range(n)] for i in range(100)]
-# for j in range(n):
-#     dv[0][j] = a[j] - 1  # 一回操作をしたらjは何に飛んでいくかの定義。Rangeはピッタリに
-# for i in range(99):  # log(k)でおｋ
-#     for j in range(n):  # 最初のスタートがj
-#         dv[i + 1][j] = dv[i][dv[i][j]]  # iのテーブルで2^i回動かしてから2^i回動かす
-# ansl = []
-# for i in range(100):
-#     if k >> i & 1:
-#         ansl.append(i)
-# now = 0  # 開始地点
-# for i in ansl:
-#     now = dv[i][now]  # 1が立っているiについて2^i回を足し合わせれば答え
-    # ダブリング
-    dv = [[0 for j in range(n)] for i in range(100)]
-
-    # TODO 一回操作をしたらjは何に飛んでいくかの定義。Rangeはピッタリに
-    for j in range(n):
-        dv[0][j] = x[j] - 1
-
-    # log(k)でおｋ
-    for i in range(99):
-        # 最初のスタートがj
-        for j in range(n):
-            # iのテーブルで2^i回動かしてから2^i回動かす
-            dv[i + 1][j] = dv[i][dv[i][j]]
-
-    bit_1_list = []
-    for i in range(100):
-        if k >> i & 1:
-            bit_1_list.append(i)
-
-    res = []
-    for idx in range(n):
-        # 開始地点
-        cur_idx = idx
-        for i in bit_1_list:
-            cur_idx = dv[i][cur_idx]  # 1が立っているiについて2^i回を足し合わせれば答え
-
-        res.append(a[cur_idx])
-
-    print(*res)
-
-
 """
 もしくは周期性を見出してみる
 """

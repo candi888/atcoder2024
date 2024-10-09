@@ -1,27 +1,6 @@
-"""
-------------------------------------------------------------------------------
-AtCoder用テンプレート
-"""
-
-from bisect import bisect_left, bisect_right
-from collections import Counter, defaultdict, deque
-from heapq import heapify, heappop, heappush
-from itertools import accumulate, permutations, product
-from sys import setrecursionlimit, stdin
-from typing import Dict, List, Set
+from typing import List
 
 import numpy as np
-
-
-def input() -> str:
-    return stdin.readline().strip()
-
-
-# setrecursionlimit(700000); import pypyjit; pypyjit.set_param('max_unroll_recursion=-1')
-
-INF = (1 << 61) - 1
-MOD9, MOD10 = 998244353, 1000000007
-"------------------------------------------------------------------------------"
 
 
 def doubling(init_list: List[int], iter_num: int) -> List[int]:
@@ -77,20 +56,3 @@ def doubling(init_list: List[int], iter_num: int) -> List[int]:
         res_idx[idx] = cur_idx
 
     return res_idx
-
-
-def main() -> None:
-    n, k = list(map(int, input().split()))
-    x = list(map(int, input().split()))
-    a = list(map(int, input().split()))
-
-    res_idx = doubling(init_list=[xi - 1 for xi in x], iter_num=k)
-
-    res = [a[idx] for idx in res_idx]
-    print(*res)
-
-    return
-
-
-if __name__ == "__main__":
-    main()

@@ -10,6 +10,8 @@ from itertools import accumulate, permutations, product
 from sys import setrecursionlimit, stdin
 from typing import Dict, List, Set
 
+import numpy as np
+
 
 def input() -> str:
     return stdin.readline().strip()

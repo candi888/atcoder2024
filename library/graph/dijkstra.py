@@ -12,7 +12,7 @@ def dijkstra(edge: List[tuple], start_node: int) -> List:
         start_node (int): 始点のノード番号
 
     Returns:
-        List: 始点から各ノードへの最短距離を格納したリスト
+        mindist_from_start_node (List): 始点から各ノードへの最短距離を格納したリスト
     """
     # 全頂点数
     node_num = len(edge)
