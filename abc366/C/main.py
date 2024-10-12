@@ -25,20 +25,28 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
-    n, k = list(map(int, input().split()))
-    r = list(map(int, input().split()))
+    q = int(input())
 
-    all_list = list(product(*(range(1, x + 1) for x in r)))
+    query = [list(map(int, input().split())) for i in range(q)]
 
-    res = []
-    for cur_list in all_list:
-        if sum(cur_list) % k == 0:
-            res.append(cur_list)
+    cnter = Counter()
+    for queryi in query:
+        if queryi[0] == 1:
+            x = queryi[1]
 
-    res.sort()
+            cnter[x] += 1
+        elif queryi[0] == 2:
+            x = queryi[1]
+            cnter[x] -= 1
+            if cnter[x] == 0:
+                # 2 今ゼロになったキーだけ削除
+                del cnter[x]
 
-    for elem in res:
-        print(*elem)
+        else:
+            # ↓遅いのでボツ！！！
+            # # 1 ゼロ以下の要素を削除
+            # cnter += Counter()
+            print(len(cnter))
 
     return
 

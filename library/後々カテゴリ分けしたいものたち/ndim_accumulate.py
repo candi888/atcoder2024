@@ -1,26 +1,5 @@
-"""
-------------------------------------------------------------------------------
-AtCoder用テンプレート
-"""
-
 import operator
-from bisect import bisect_left, bisect_right
-from collections import Counter, defaultdict, deque
 from functools import reduce
-from heapq import heapify, heappop, heappush
-from itertools import accumulate, permutations, product
-from sys import setrecursionlimit, stdin
-
-
-def input() -> str:
-    return stdin.readline().strip()
-
-
-# setrecursionlimit(700000); import pypyjit; pypyjit.set_param('max_unroll_recursion=-1')
-
-INF = (1 << 61) - 1
-MOD9, MOD10 = 998244353, 1000000007
-"------------------------------------------------------------------------------"
 
 
 def n_dim_cumsum(arr):
@@ -108,31 +87,22 @@ def calc_part_of_accmulate_ndim(acc_ndim_list_prefix_zero, left_right_list, bits
     )
 
 
-def main() -> None:
-    n = int(input())
-    a = [[list(map(int, input().split())) for _ in range(n)] for _ in range(n)]
-    q = int(input())
-    query = [list(map(int, input().split())) for _ in range(q)]
+# TODO 使用例
 
-    acc_a = n_dim_cumsum(arr=a)
+# acc_a = n_dim_cumsum(arr=a)
 
-    ndim = 3
-    for queryi in query:
-        assert 2 * ndim == len(queryi)
+# ndim = 3
+# for queryi in query:
+#     assert 2 * ndim == len(queryi)
 
-        left_right_list = [(queryi[2 * i], queryi[2 * i + 1]) for i in range(ndim)]
+#     left_right_list = [(queryi[2 * i], queryi[2 * i + 1]) for i in range(ndim)]
 
-        cur_sum = 0
-        for bits in product([0, 1], repeat=ndim):
-            cur_sum += calc_part_of_accmulate_ndim(
-                acc_ndim_list_prefix_zero=acc_a,
-                left_right_list=left_right_list,
-                bits=bits,
-            )
+#     cur_sum = 0
+#     for bits in product([0, 1], repeat=ndim):
+#         cur_sum += calc_part_of_accmulate_ndim(
+#             acc_ndim_list_prefix_zero=acc_a,
+#             left_right_list=left_right_list,
+#             bits=bits,
+#         )
 
-        print(cur_sum)
-    return
-
-
-if __name__ == "__main__":
-    main()
+#     print(cur_sum)

@@ -3,14 +3,13 @@
 AtCoder用テンプレート
 """
 
+import math
 from bisect import bisect_left, bisect_right
 from collections import Counter, defaultdict, deque
 from heapq import heapify, heappop, heappush
 from itertools import accumulate, permutations, product
 from sys import setrecursionlimit, stdin
 from typing import Dict, List, Set
-
-import numpy as np
 
 
 def input() -> str:
@@ -47,7 +46,7 @@ def doubling(init_list: List[int], iter_num: int) -> List[int]:
         return res_idx
 
     # ダブリング用配列の行数．
-    row_num = int(np.log2(iter_num)) + 2
+    row_num = int(math.log2(iter_num)) + 2
 
     # axis=0の+10はbuffer．理論上はlog_2(iter_num)でおｋ
     dv = [[0 for __ in range(col_num)] for _ in range(row_num)]

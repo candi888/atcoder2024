@@ -1,10 +1,7 @@
 from collections import deque
-from typing import List
 
 
-def syakutori(
-    input_list: List,
-) -> None:
+def syakutori(input_list):
     """尺取り法をする．
     見ている区間が短いときにTrue, 長くなるとどこかでFalseになるパターンのものが対象．
     ↑の逆の場合はis_shrink_leftの判定の補集合を考えればよさそう？
@@ -13,7 +10,7 @@ def syakutori(
         input_list (List): 尺取り法で走査対象のリスト．
     """
 
-    def is_shrink_left() -> bool:
+    def is_shrink_left():
         """左端を縮めるかの判定を行う．
 
         Returns:

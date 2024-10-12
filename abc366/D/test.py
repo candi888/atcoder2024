@@ -1,32 +1,13 @@
-"""
-------------------------------------------------------------------------------
-AtCoder用テンプレート
-"""
+import operator
+from functools import reduce
 
-from bisect import bisect_left, bisect_right
-from collections import Counter, defaultdict, deque
-from heapq import heapify, heappop, heappush
-from itertools import accumulate, permutations, product
-from sys import setrecursionlimit, stdin
-from typing import Dict, List, Set
+# ネストされたリスト
+nested_list = [[[19, 29], [93, 94]], [[95, 96], [97, 98]]]
 
-import numpy as np
+# インデックスのリスト
+indices = [0, 1, 1]
 
+# 要素にアクセス
+value = reduce(operator.getitem, indices, nested_list)
 
-def input() -> str:
-    return stdin.readline().strip()
-
-
-# setrecursionlimit(700000); import pypyjit; pypyjit.set_param('max_unroll_recursion=-1')
-
-INF = (1 << 61) - 1
-MOD9, MOD10 = 998244353, 1000000007
-"------------------------------------------------------------------------------"
-
-
-def main() -> None:
-    return
-
-
-if __name__ == "__main__":
-    main()
+print(value)  # 出力: 4

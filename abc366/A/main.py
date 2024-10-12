@@ -25,6 +25,17 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
+    n, t, a = list(map(int, input().split()))
+
+    sum = t + a
+    if t > a:
+        a += n - sum
+
+        print("Yes" if t > a else "No")
+    else:
+        t += n - sum
+
+        print("Yes" if a > t else "No")
     return
 
 

@@ -1,9 +1,7 @@
-from typing import List
-
-import numpy as np
+import math
 
 
-def doubling(init_list: List[int], iter_num: int) -> List[int]:
+def doubling(init_list, iter_num):
     """
     K回同じ操作をした後の状態を知りたい（kがクソデカ整数）の場合に、o(k)をo(log(k))に落とせる。
     Dv[i][j]→jに2^i回操作したら何に飛んでいくか
@@ -26,7 +24,7 @@ def doubling(init_list: List[int], iter_num: int) -> List[int]:
         return res_idx
 
     # ダブリング用配列の行数．
-    row_num = int(np.log2(iter_num)) + 2
+    row_num = int(math.log2(iter_num)) + 2
 
     # axis=0の+10はbuffer．理論上はlog_2(iter_num)でおｋ
     dv = [[0 for __ in range(col_num)] for _ in range(row_num)]

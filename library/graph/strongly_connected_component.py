@@ -1,35 +1,7 @@
-"""
-------------------------------------------------------------------------------
-AtCoder用テンプレート
-"""
-
-from bisect import bisect_left, bisect_right
-from collections import Counter, defaultdict, deque
 from heapq import heapify, heappop, heappush
-from itertools import accumulate, permutations, product
-from sys import setrecursionlimit, stdin
-from typing import Dict, List, Set
-
-import numpy as np
 
 
-def input() -> str:
-    return stdin.readline().strip()
-
-
-setrecursionlimit(700000)
-import pypyjit
-
-pypyjit.set_param("max_unroll_recursion=-1")
-
-INF = (1 << 61) - 1
-MOD9, MOD10 = 998244353, 1000000007
-"------------------------------------------------------------------------------"
-
-
-def strongly_connected_component(
-    n: int, edge: List[List[int]], rev_edge: List[List[int]]
-) -> List[Set[int]]:
+def strongly_connected_component(n, edge, rev_edge):
     """
     連結成分に含まれる頂点番号を格納したSetを全て格納したListを返す．
 
@@ -51,9 +23,7 @@ def strongly_connected_component(
     # DFS用
     seen = [0] * n
 
-    def dfs_step1_post_order_numbering(
-        cur: int,
-    ) -> None:
+    def dfs_step1_post_order_numbering(cur):
         """
         再帰DFSによって，元のグラフで帰りがけ順に頂点に番号付けを行う
 
@@ -90,7 +60,7 @@ def strongly_connected_component(
     # DFS用
     seen = [0] * n
 
-    def dfs_step2_get_sccset_contains_root(root: int) -> Set[int]:
+    def dfs_step2_get_sccset_contains_root(root):
         """
         Stack DFSにより，rootから到達できる頂点を列挙し，それら（自身含む）を強連結成分としてSetとして返す
 
@@ -128,9 +98,7 @@ def strongly_connected_component(
     return sccset_list
 
 
-def get_topological_sorted_sccsetlist(
-    sccset_list: List[Set[int]], original_branches: List[List[int]]
-) -> List[Set[int]]:
+def get_topological_sorted_sccsetlist(sccset_list, original_branches):
     """
     連結成分に含まれる頂点番号を格納したSetを全て格納したListを受け取り，強連結成分をそれぞれ一つの潰したSCC頂点としてみなしてトポロジカルソートを行い，その結果を返す
 
@@ -142,7 +110,7 @@ def get_topological_sorted_sccsetlist(
         List[Set[int]]: 強連結成分をそれぞれ一つの潰したSCC頂点としてみなしてトポロジカルソートを行った結果を格納したList
     """
 
-    def topological_sort(n: int, edge: List[List[int]]) -> List[int]:
+    def topological_sort(n, edge):
         """
         頂点0～n-1をもつ，edgeで繋がれた有向連結グラフに対し，トポロジカルソートを行う．
         returnされるトポロジカルソート後のグラフは頂点番号の並びが辞書順最小のものである．
@@ -194,44 +162,18 @@ def get_topological_sorted_sccsetlist(
     for from_node in range(nodenum_original):
         from_sccsetidx = nodenum_to_sccsetidx[from_node]
 
-        # 辺の重複を防ぐため，一旦setにsccnodeを入れていく
-        to_sccsetidx_set_tmp = set()
-
-        for to_node in original_branches[from_node]:
-            to_sccsetidx = nodenum_to_sccsetidx[to_node]
-
-            if not (from_sccsetidx == to_sccsetidx):
-                to_sccsetidx_set_tmp.add(to_sccsetidx)
-
         # from_sccsetidxのSCC頂点から繋がっているSCC頂点番号を格納
-        sccnode_branches[from_sccsetidx] = list(to_sccsetidx_set_tmp)
+        sccnode_branches[from_sccsetidx] = list(
+            set(
+                [
+                    nodenum_to_sccsetidx[to_node]
+                    for to_node in original_branches[from_node]
+                    if not (from_sccsetidx == nodenum_to_sccsetidx[to_node])
+                ]
+            )
+        )
 
     # SCC頂点のグラフについてトポロジカルソートする
     sorted_sccnode = topological_sort(n=nodenum_sccnode, edge=sccnode_branches)
 
     return [sccset_list[sccnode] for sccnode in sorted_sccnode]
-
-
-def main() -> None:
-    n, m = list(map(int, input().split()))
-    edges_input = [list(map(int, input().split())) for _ in range(m)]
-
-    edges = [[] for _ in range(n)]
-    rev_edges = [[] for _ in range(n)]
-    for ai, bi in edges_input:
-        edges[ai].append(bi)
-        rev_edges[bi].append(ai)
-
-    sccset_list = strongly_connected_component(n=n, edge=edges, rev_edge=rev_edges)
-    sorted_sccset_list = get_topological_sorted_sccsetlist(
-        sccset_list=sccset_list, original_branches=edges
-    )
-
-    print(len(sorted_sccset_list))
-    for sccset in sorted_sccset_list:
-        print(len(sccset), *sccset)
-    return
-
-
-if __name__ == "__main__":
-    main()

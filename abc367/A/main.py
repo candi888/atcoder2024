@@ -23,7 +23,14 @@ MOD9, MOD10 = 998244353, 1000000007
 
 
 def main() -> None:
-    return
+    a, b, c = list(map(int, input().split()))
+
+    if b > c:
+        c += 24
+        print("No" if (b <= a <= c or b <= a + 24 <= c) else "Yes")
+
+    else:
+        print("No" if b <= a <= c else "Yes")
 
 
 if __name__ == "__main__":

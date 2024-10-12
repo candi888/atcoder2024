@@ -1,10 +1,9 @@
 from heapq import heappop, heappush
-from typing import List
 
 INF = (1 << 61) - 1
 
 
-def dijkstra(edge: List[tuple], start_node: int) -> List:
+def dijkstra(edge, start_node):
     """ダイクストラ法によって，始点からすべての頂点までの最短距離を０(ElogV)で算定する．
 
     Args:
@@ -25,7 +24,7 @@ def dijkstra(edge: List[tuple], start_node: int) -> List:
     confirmed = [False for i in range(node_num)]
 
     # heapq用の配列
-    heap: List = []
+    heap = []
     # [頂点の暫定値，頂点番号]を格納していく
     heappush(heap, [0, start_node])
 
