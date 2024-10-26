@@ -26,36 +26,44 @@ MOD9, MOD10 = 998244353, 1000000007
 
 def main() -> None:
     n = int(input())
-    s_input = input()
-    s_list = list(s_input)
 
-    dp = [[-INF] * 3 for i in range(n + 1)]
+    if n == 1:
+        print(0)
+        exit()
 
-    # init
-    dp[0] = [0] * 3
+    n -= 1
 
-    hand_to_index = {hand: i for i, hand in enumerate(["R", "S", "P"])}
+    res_len = 0
+    cur_check = 0
+    for i in range(10**7):
+        res_len += 1
 
-    for i in range(n):
-        si = s_list[i]
+        cur_increment = 9 * pow(10, i)
+        if n <= cur_check + cur_increment:
+            break
+        cur_check += cur_increment
 
-        if si != "P":
-            dp[i + 1][hand_to_index["R"]] = max(
-                dp[i][hand_to_index["S"]] + (si == "S"),
-                dp[i][hand_to_index["P"]] + (si == "S"),
-            )
-        if si != "R":
-            dp[i + 1][hand_to_index["S"]] = max(
-                dp[i][hand_to_index["R"]] + (si == "P"),
-                dp[i][hand_to_index["P"]] + (si == "P"),
-            )
-        if si != "S":
-            dp[i + 1][hand_to_index["P"]] = max(
-                dp[i][hand_to_index["R"]] + (si == "R"),
-                dp[i][hand_to_index["S"]] + (si == "R"),
-            )
+        res_len += 1
 
-    print(max(dp[-1]))
+        if n <= cur_check + cur_increment:
+            break
+        cur_check += cur_increment
+
+    res_list = [-INF] * res_len
+
+    check_n_str = f"{n - cur_check:0{math.ceil(res_len / 2)}}"
+    print(check_n_str)
+    for i in range(math.ceil(res_len / 2)):
+        cur_res = int(check_n_str[i])
+        if i == 0:
+            res_list[i] = str(cur_res + 1)
+            res_list[-i - 1] = str(cur_res + 1)
+        else:
+            res_list[i] = str(cur_res - 1)
+            res_list[-i - 1] = str(cur_res - 1)
+
+    print("".join(res_list))
+
     return
 
 
